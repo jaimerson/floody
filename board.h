@@ -11,7 +11,7 @@ struct _board {
 void setup_board(Board *board, int size){
   board->size = size;
   int arr[size][size];
-  board->tiles = arr;
+  board->tiles = (int**)arr;
 }
 
 #endif
