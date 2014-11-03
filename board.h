@@ -1,10 +1,17 @@
 #ifndef FLOODY_BOARD
 #define FLOODY_BOARD
 
-typedef struct board
-{
+typedef struct _board Board;
+
+struct _board {
   int size;
-  int tries;
-} Board;
+  int **tiles;
+};
+
+void setup_board(Board *board, int size){
+  board->size = size;
+  int arr[size][size];
+  board->tiles = arr;
+}
 
 #endif
