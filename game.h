@@ -30,9 +30,10 @@ void draw_board(Board board){
 }
 
 void draw_tile(tile){
-  attron(COLOR_PAIR(tile));
+  char color = tile + 1;
+  attron(COLOR_PAIR(color));
   printw("  %i  ", tile);
-  attroff(COLOR_PAIR(tile));
+  attroff(COLOR_PAIR(color));
 }
 
 void teardown(){

@@ -3,7 +3,7 @@
 #include <curses.h>
 
 typedef enum {
-  RED = 0,
+  RED=1,
   BLUE,
   WHITE,
   GREEN,
