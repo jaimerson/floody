@@ -1,9 +1,9 @@
-#include <curses.h>
 #ifndef FLOODY_COLORS
 #define FLOODY_COLORS
+#include <curses.h>
 
 typedef enum {
-  RED,
+  RED = 0,
   BLUE,
   WHITE,
   GREEN,

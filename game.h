@@ -20,18 +20,18 @@ void play(Board *board){
 
 void draw_board(Board board){
   int i, j;
-  for(i = 0; i < board.size; i++){
-    for(j = 0; j < board.size; j++){
+  for(i = 0; i < 15; i++){
+    for(j = 0; j < 15; j++){
       draw_tile(board.tiles[i][j]);
     }
-    printw("\n");
+    move(i, 0);
   }
   refresh();
 }
 
 void draw_tile(tile){
   attron(COLOR_PAIR(tile));
-  printw("#");
+  printw("  %i  ", tile);
   attroff(COLOR_PAIR(tile));
 }
 
