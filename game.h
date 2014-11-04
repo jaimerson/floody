@@ -1,4 +1,5 @@
 #include <curses.h>
+#include "settings.h"
 #include "colors.h"
 #include "board.h"
 
@@ -20,8 +21,8 @@ void play(Board *board){
 
 void draw_board(Board board){
   int i, j;
-  for(i = 0; i < 15; i++){
-    for(j = 0; j < 15; j++){
+  for(i = 0; i < BOARD_SIZE; i++){
+    for(j = 0; j < BOARD_SIZE; j++){
       draw_tile(board.tiles[i][j]);
     }
     move(i, 0);

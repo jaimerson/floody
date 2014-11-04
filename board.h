@@ -1,11 +1,11 @@
 #ifndef FLOODY_BOARD
 #define FLOODY_BOARD
-#define BOARD_SIZE 15
 #include <stdlib.h>
+#include "settings.h"
+#include "colors.h"
 
 typedef struct _board {
-  int size;
-  char tiles[BOARD_SIZE][BOARD_SIZE];
+  Color tiles[BOARD_SIZE][BOARD_SIZE];
 } Board;
 
 void setup_board(Board *board){

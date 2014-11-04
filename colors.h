@@ -9,7 +9,7 @@ typedef enum {
   GREEN,
   YELLOW,
   CYAN
-} Colors;
+} Color;
 
 void init_colors(){
   init_pair(RED, COLOR_WHITE, COLOR_RED);
