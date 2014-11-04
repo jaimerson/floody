@@ -1,21 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "game.h"
 #include "board.h"
 
 int main(){
-  Board my_board;
-  printf("Type the size now.\n");
+  setup();
 
-  scanf("%i", &my_board.size);
-  int arr[my_board.size][my_board.size];
+  Board board;
+  setup_board(&board);
 
-  int i, j;
-
-  for(i = 0; i < my_board.size; i++){
-    for(j = 0; j < my_board.size; j++){
-      printf("[%i]", abs(arr[i][j] % 6));
-    }
-    printf("\n");
-  }
-
+  play(&board);
   return 0;
 }
