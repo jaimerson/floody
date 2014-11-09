@@ -2,6 +2,8 @@
 #include "settings.h"
 #include "colors.h"
 #include "board.h"
+#include "keys.h"
+#include "utils.h"
 
 void teardown();
 void draw_tile(int);
@@ -15,8 +17,12 @@ void setup(){
 }
 
 void play(Board *board){
-  char key = turn(board);
-  printw("%i", key)
+  Key key;
+  while(key != QUIT_KEY){
+    key = turn(board);
+    log_if_debug(key);
+  }
+  teardown();
   //handle_keyboard_event(key);
 }
 
