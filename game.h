@@ -6,6 +6,7 @@
 void teardown();
 void draw_tile(int);
 void draw_board(Board);
+char turn(Board*);
 
 void setup(){
   initscr();
@@ -14,9 +15,14 @@ void setup(){
 }
 
 void play(Board *board){
+  char key = turn(board);
+  printw("%i", key)
+  //handle_keyboard_event(key);
+}
+
+char turn(Board *board){
   draw_board(*board);
-  getch();
-  teardown();
+  return getch();
 }
 
 void draw_board(Board board){
@@ -33,7 +39,7 @@ void draw_board(Board board){
 void draw_tile(tile){
   char color = tile + 1;
   attron(COLOR_PAIR(color));
-  printw("  %i  ", tile);
+  printw("  %i  ", color);
   attroff(COLOR_PAIR(color));
 }
 
