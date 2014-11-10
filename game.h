@@ -3,7 +3,7 @@
 #include "colors.h"
 #include "board.h"
 #include "keys.h"
-#include "utils.h"
+#include "controls.h"
 
 void teardown();
 void draw_tile(int);
@@ -20,10 +20,9 @@ void play(Board *board){
   Key key;
   while(key != QUIT_KEY){
     key = turn(board);
-    log_if_debug(key);
+    handle_keyboard_event(key, board);
   }
   teardown();
-  //handle_keyboard_event(key);
 }
 
 char turn(Board *board){
@@ -32,6 +31,7 @@ char turn(Board *board){
 }
 
 void draw_board(Board board){
+  move(0,0);
   int i, j;
   for(i = 0; i < BOARD_SIZE; i++){
     for(j = 0; j < BOARD_SIZE; j++){
