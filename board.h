@@ -1,6 +1,7 @@
 #ifndef FLOODY_BOARD
 #define FLOODY_BOARD
 #include <stdlib.h>
+#include <time.h>
 #include "settings.h"
 #include "colors.h"
 
@@ -10,6 +11,8 @@ typedef struct _board {
 
 void setup_board(Board *board){
   int i, j;
+  srand(time(NULL));
+
   for(i = 0; i < BOARD_SIZE; i++){
     for(j = 0; j < BOARD_SIZE; j++){
       board->tiles[i][j] = rand() % 6;
