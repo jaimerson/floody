@@ -21,6 +21,7 @@ void play(Board *board){
   while(key != QUIT_KEY){
     key = turn(board);
     handle_keyboard_event(key, board);
+    draw_board(*board);
   }
   teardown();
 }
