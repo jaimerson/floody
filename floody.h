@@ -4,18 +4,23 @@
 #include "keys.h"
 #include "utils.h"
 
-void flood_fill(Color *tile, Color target, Color replacement){
-//  printw("target: %i - replacement: %i - tile: %i\n", target, replacement, *tile);
-  if(target != replacement && *tile != replacement){
-    *tile = replacement;
-    flood_fill(tile + 1, target, replacement);
-//    flood_fill(tile + BOARD_SIZE, target, replacement);
+void flood_fill(Color *tiles, int line, int column, Color target, Color replacement){
+  if(line < 0 || column < 0 || line > BOARD_SIZE || column > BOARD_SIZE){
+    return;
+  }
+
+  if(target != replacement && tiles[line * BOARD_SIZE + column] == target){
+    tiles[line * BOARD_SIZE + column] = replacement;
+    flood_fill(tiles, line, column + 1, target, replacement);
+    flood_fill(tiles, line, column - 1, target, replacement);
+    flood_fill(tiles, line - 1, column, target, replacement);
+    flood_fill(tiles, line + 1, column, target, replacement);
   }
 }
 
 void flood(Board *board, Key code){
   Color target = board->tiles[0][0];
-  flood_fill(&board->tiles, target, key_to_color(code));
+  flood_fill(&(*board).tiles, 0, 0, target, key_to_color(code));
 }
 
 #endif
