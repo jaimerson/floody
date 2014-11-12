@@ -9,6 +9,7 @@ void teardown();
 void draw_tile(int);
 void draw_board(Board);
 char turn(Board*);
+int game_is_over(Board);
 
 void setup(){
   initscr();
@@ -19,11 +20,19 @@ void setup(){
 void play(Board *board){
   Key key;
   while(key != QUIT_KEY){
+    if(game_is_over(board)){
+      printw("WON!");
+    }
+
     key = turn(board);
     handle_keyboard_event(key, board);
     draw_board(*board);
   }
   teardown();
+}
+
+int game_is_over(Board board){
+  return won(&board);
 }
 
 char turn(Board *board){

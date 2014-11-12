@@ -23,4 +23,18 @@ void flood(Board *board, Key code){
   flood_fill(&(*board).tiles, 0, 0, target, key_to_color(code));
 }
 
+int won(Board *board){
+  int i, j, current;
+
+  for(i = 0; i < BOARD_SIZE; i++){
+    for(j = 0; j < BOARD_SIZE; j++){
+      current = board->tiles[i][j];
+      if(current != board->tiles[i + 1][j + 1]){
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+
 #endif
