@@ -20,18 +20,20 @@ void flood_fill(Color *tiles, int line, int column, Color target, Color replacem
 
 void flood(Board *board, Key code){
   Color target = board->tiles[0][0];
-  flood_fill(&(*board).tiles, 0, 0, target, key_to_color(code));
+  flood_fill((Color *)&(*board).tiles, 0, 0, target, key_to_color(code));
 }
 
 int won(Board *board){
-  int i, j, current;
+  int i, j, current, previous;
+  current = previous = board->tiles[0][0];
 
   for(i = 0; i < BOARD_SIZE; i++){
     for(j = 0; j < BOARD_SIZE; j++){
       current = board->tiles[i][j];
-      if(current != board->tiles[i + 1][j + 1]){
+      if(current != previous){
         return 0;
       }
+      previous = current;
     }
   }
   return 1;

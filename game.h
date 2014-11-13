@@ -9,7 +9,7 @@ void teardown();
 void draw_tile(int);
 void draw_board(Board);
 char turn(Board*);
-int game_is_over(Board);
+int game_is_over(Board*);
 
 void setup(){
   initscr();
@@ -31,8 +31,8 @@ void play(Board *board){
   teardown();
 }
 
-int game_is_over(Board board){
-  return won(&board);
+int game_is_over(Board *board){
+  return won(board);
 }
 
 char turn(Board *board){
