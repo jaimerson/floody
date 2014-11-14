@@ -20,7 +20,7 @@ void flood_fill(Color *tiles, int line, int column, Color target, Color replacem
 
 void flood(Board *board, Key code){
   Color target = board->tiles[0][0];
-  flood_fill((Color *)&(*board).tiles, 0, 0, target, key_to_color(code));
+  flood_fill((Color *)&board->tiles, 0, 0, target, key_to_color(code));
 }
 
 int won(Board *board){
