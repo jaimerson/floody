@@ -7,7 +7,7 @@
 
 void teardown();
 void draw_tile(int);
-void draw_board(Board);
+void draw_board(Board*);
 char turn(Board*);
 int game_is_over(Board*);
 
@@ -26,7 +26,7 @@ void play(Board *board){
 
     key = turn(board);
     handle_keyboard_event(key, board);
-    draw_board(*board);
+    draw_board(board);
   }
   teardown();
 }
@@ -36,19 +36,20 @@ int game_is_over(Board *board){
 }
 
 char turn(Board *board){
-  draw_board(*board);
+  draw_board(board);
   return getch();
 }
 
-void draw_board(Board board){
+void draw_board(Board *board){
   move(0,0);
   int i, j;
   for(i = 0; i < BOARD_SIZE; i++){
     for(j = 0; j < BOARD_SIZE; j++){
-      draw_tile(board.tiles[i][j]);
+      draw_tile(board->tiles[i][j]);
     }
     move(i, 0);
   }
+  printw("%x\n", &board->tiles);
   refresh();
 }
 
