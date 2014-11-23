@@ -26,8 +26,6 @@ void play(Board *board){
       printw("WON!");
     }
 
-    clear();
-
     key = turn(board);
     handle_keyboard_event(key, board);
     draw_board(board);
@@ -51,13 +49,13 @@ void draw_board(Board *board){
       draw_tile(board->tiles[i][j], i, j);
     }
   }
-  refresh();
 }
 
 void draw_tile(tile, line, column){
   char color = tile + 1;
   attron(COLOR_PAIR(color));
-  mvprintw(line, column, "  %i  ", color);
+  mvprintw(line, column, "%i", color);
+  refresh();
   attroff(COLOR_PAIR(color));
 }
 

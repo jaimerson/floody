@@ -4,26 +4,26 @@
 #include "keys.h"
 #include "utils.h"
 
-void flood_fill(Color *tiles, int line, int column, Color target, Color replacement){
-  //printw("line: %i\ncolumn: %i\n-----",  line, column);
-  if(line < 0 || column < 0 || line > BOARD_SIZE || column > BOARD_SIZE){
+void flood_fill(Board *board, int line, int column, Color target, Color replacement){
+  if(line < 0 || column < 0 || line >= BOARD_SIZE || column >= BOARD_SIZE){
     return;
   }
+  mvprintw(BOARD_SIZE, 0, "%i - %i\n", board->tiles[line][column], target);
 
-  if(target != replacement && tiles[line * BOARD_SIZE + column] == target){
-    tiles[line * BOARD_SIZE + column] = replacement;
-    flood_fill(tiles, line, column + 1, target, replacement);
-    flood_fill(tiles, line, column - 1, target, replacement);
-    flood_fill(tiles, line - 1, column, target, replacement);
-    flood_fill(tiles, line + 1, column, target, replacement);
+  if(board->tiles[line][column] == target){
+    board->tiles[line][column] = replacement;
+    flood_fill(board, line, column + 1, target, replacement);
+    flood_fill(board, line, column - 1, target, replacement);
+    flood_fill(board, line - 1, column, target, replacement);
+    flood_fill(board, line + 1, column, target, replacement);
   }
 }
 
-void flood(Color *tiles, Key code){
+void flood(Board *board, Key code){
   Color code_color = key_to_color(code);
-  tiles[0] = code_color;
-  Color target = tiles[0];
-  flood_fill(tiles, 0, 0, target, code_color);
+  board->tiles[0][0] = code_color;
+  Color target = board->tiles[0][0];
+  flood_fill(board, 0, 0, target, code_color);
 }
 
 int won(Board *board){
