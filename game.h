@@ -6,13 +6,15 @@
 #include "controls.h"
 
 void teardown();
-void draw_tile(int);
+void draw_tile(int, int, int);
 void draw_board(Board*);
 char turn(Board*);
 int game_is_over(Board*);
 
 void setup(){
   initscr();
+  noecho();
+  curs_set(FALSE);
   start_color();
   init_colors();
 }
@@ -23,6 +25,8 @@ void play(Board *board){
     if(game_is_over(board)){
       printw("WON!");
     }
+
+    clear();
 
     key = turn(board);
     handle_keyboard_event(key, board);
@@ -41,22 +45,19 @@ char turn(Board *board){
 }
 
 void draw_board(Board *board){
-  move(0,0);
   int i, j;
   for(i = 0; i < BOARD_SIZE; i++){
     for(j = 0; j < BOARD_SIZE; j++){
-      draw_tile(board->tiles[i][j]);
+      draw_tile(board->tiles[i][j], i, j);
     }
-    move(i, 0);
   }
-  printw("%x\n", &board->tiles);
   refresh();
 }
 
-void draw_tile(tile){
+void draw_tile(tile, line, column){
   char color = tile + 1;
   attron(COLOR_PAIR(color));
-  printw("  %i  ", color);
+  mvprintw(line, column, "  %i  ", color);
   attroff(COLOR_PAIR(color));
 }
 

@@ -23,8 +23,7 @@ void flood(Color *tiles, Key code){
   Color code_color = key_to_color(code);
   tiles[0] = code_color;
   Color target = tiles[0];
-  //flood_fill(tiles, 0, 0, target, code_color);
-  printw("%x\n", tiles);
+  flood_fill(tiles, 0, 0, target, code_color);
 }
 
 int won(Board *board){
