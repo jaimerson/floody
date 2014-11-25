@@ -8,6 +8,8 @@
 void teardown();
 void draw_tile(int, int, int);
 void draw_board(Board*);
+void draw_menu(Board*);
+void print_message(char[]);
 char turn(Board*);
 int game_is_over(Board*);
 
@@ -21,20 +23,31 @@ void setup(){
 
 void play(Board *board){
   Key key;
-  while(key != QUIT_KEY){
-    if(game_is_over(board)){
-      printw("WON!");
-    }
-
+  while(key != QUIT_KEY && !game_is_over(board)){
     key = turn(board);
     handle_keyboard_event(key, board);
     draw_board(board);
+    draw_menu(board);
   }
+  getch();
   teardown();
 }
 
 int game_is_over(Board *board){
-  return won(board);
+  if(won(board)){
+    print_message("GANHOU!!!11");
+    return 1;
+  } else if(lost(board)){
+    print_message("PERDEU!!!11");
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+void print_message(char string[]){
+  clear();
+  mvprintw(0, 0, string);
 }
 
 char turn(Board *board){
@@ -49,6 +62,13 @@ void draw_board(Board *board){
       draw_tile(board->tiles[i][j], i, j);
     }
   }
+}
+
+void draw_menu(Board *board){
+  int tries_line = BOARD_SIZE + 2;
+  int help_line = tries_line + 1;
+  mvprintw(tries_line, 0, "%i tentativas restantes", MAX_TRIES - board->tries);
+  mvprintw(help_line, 0, "Press q to exit, and numbers 1 to 6 to play.");
 }
 
 void draw_tile(tile, line, column){

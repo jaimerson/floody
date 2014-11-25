@@ -8,9 +8,8 @@ void flood_fill(Board *board, int line, int column, Color target, Color replacem
   if(line < 0 || column < 0 || line >= BOARD_SIZE || column >= BOARD_SIZE){
     return;
   }
-  mvprintw(BOARD_SIZE, 0, "%i - %i\n", board->tiles[line][column], target);
 
-  if(board->tiles[line][column] == target){
+  if(target != replacement && board->tiles[line][column] == target){
     board->tiles[line][column] = replacement;
     flood_fill(board, line, column + 1, target, replacement);
     flood_fill(board, line, column - 1, target, replacement);
@@ -21,7 +20,6 @@ void flood_fill(Board *board, int line, int column, Color target, Color replacem
 
 void flood(Board *board, Key code){
   Color code_color = key_to_color(code);
-  board->tiles[0][0] = code_color;
   Color target = board->tiles[0][0];
   flood_fill(board, 0, 0, target, code_color);
 }
@@ -40,6 +38,10 @@ int won(Board *board){
     }
   }
   return 1;
+}
+
+int lost(Board *board){
+  return board->tries >= MAX_TRIES;
 }
 
 #endif
