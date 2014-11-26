@@ -1,3 +1,5 @@
+#ifndef FLOODY_GAME
+#define FLOODY_GAME
 #include <curses.h>
 #include "settings.h"
 #include "colors.h"
@@ -29,7 +31,6 @@ void play(Board *board){
     draw_board(board);
     draw_menu(board);
   }
-  getch();
   teardown();
 }
 
@@ -81,5 +82,7 @@ void draw_tile(tile, line, column){
 
 void teardown(){
   endwin();
-  exit(0);
+  exit(2);
 }
+
+#endif
