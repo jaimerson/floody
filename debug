@@ -1,0 +1,2 @@
+#/bin/sh
+gcc -o build/floody_debug -g main.c -lncurses && gdb build/floody_debug
